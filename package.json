@@ -1,7 +1,7 @@
 {
-  "name": "copy-files-tree",
-  "version": "3.0.0",
-  "description": "copy files from source into destination by files tree",
+  "name": "copy-files",
+  "version": "1.0.0",
+  "description": "copy files from source into destination",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,16 +13,18 @@
   },
   "keywords": [
     "copy-files-tree",
+    "copy-files-tree-v2",
     "copy",
+    "copy files",
     "files",
     "tree"
   ],
   "author": "Goor Lavi <goorlavi1@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/GoorLavi/copy-files-tree/issues"
+    "url": "https://github.com/GoorLavi/copy-files/issues"
   },
-  "homepage": "https://github.com/GoorLavi/copy-files-tree#readme",
+  "homepage": "https://github.com/GoorLavi/copy-files#readme",
   "dependencies": {
     "fs-extra": "^5.0.0"
   }
