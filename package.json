@@ -1,5 +1,5 @@
 {
-  "name": "copy-files",
+  "name": "copy-files-rev",
   "version": "1.0.0",
   "description": "copy files from source into destination",
   "main": "index.js",
@@ -13,11 +13,10 @@
   },
   "keywords": [
     "copy-files-tree",
-    "copy-files-tree-v2",
+    "copy-files",
     "copy",
     "copy files",
-    "files",
-    "tree"
+    "files"
   ],
   "author": "Goor Lavi <goorlavi1@gmail.com>",
   "license": "ISC",
@@ -26,6 +25,7 @@
   },
   "homepage": "https://github.com/GoorLavi/copy-files#readme",
   "dependencies": {
+    "expand-home-dir": "^0.0.3",
     "fs-extra": "^5.0.0"
   }
 }

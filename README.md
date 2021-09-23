@@ -1,29 +1,26 @@
-# copy-files-tree
+# copy-files
 
-Copy files and folder to destination by tree model
+Copy files and folders to a wanted destination.  
+This is the next generation of [copy-files-tree](https://github.com/GoorLavi/copy-files-tree) package
 
 ## Getting Started
 
 To install package using npm
 ```
-npm install --save copy-files-tree
+npm install --save copy-files
 ```
 Or with yarn
 ```
-yarn add copy-files-tree
+yarn add copy-files
 ```
 
 ### How to use?
-
-We have made some changes in the api,
-Currently we have sync and async methods.
-
 ##### Sync usage: 
 
 ```js
-import {copyItemsSync} from 'copy-files-tree'
+import {copyFilesSync} from 'copy-files-tree'
 
-const error = copyItemsSync(FoldersData);
+const error = copyFilesSync(FoldersData);
 ```  
 
 ##### Async usage: 
@@ -77,8 +74,7 @@ const FoldersData = {
    const error = await copyFiles(FoldersData);
 })()
 
-```
-
+```  
 
 ### Files Structure
 ```js
@@ -97,6 +93,8 @@ const FoldersData = {
                                                    - `file-name2.txt`
                             
 ```
+## Donations
+Please don't hesitate to donate this package, and reaching me out.
 
 [More Examples](example.js)
 

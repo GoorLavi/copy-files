@@ -1,7 +1,9 @@
 const fs = require('fs-extra');
+const expandHomeDir = require('expand-home-dir')
+
+const softenPath = p => expandHomeDir(p);
 
 const getAllFilteredItems = (path, isAllDirectory, isAllFiles) => {
-
     return (fs.readdirSync(path) || []).filter(item => {
         const isDirectory = fs.statSync(`${path}/${item}`).isDirectory();
         return (isDirectory && isAllDirectory || !isDirectory && isAllFiles);
@@ -30,9 +32,14 @@ const copyFilesSync = filesData => {
                 foldersAndFiles = []
             } = filesData[sourceDirPath];
 
-            const filteredItems = getAllFilteredItems(sourceDirPath, allDirectories, allFiles);
+            const softenSourceDirPath = softenPath(sourceDirPath)
+
+            const filteredItems = getAllFilteredItems(softenSourceDirPath, allDirectories, allFiles);
             const items = foldersAndFiles.concat(filteredItems);
-            copyItemsSync({items, destination, sourceDirPath});
+            copyItemsSync({
+                items,
+                destination: softenPath(destination),
+                sourceDirPath: softenSourceDirPath});
         }
 
     } catch (error) {
@@ -68,9 +75,15 @@ const copyFiles = async filesData => {
                 foldersAndFiles = []
             } = filesData[sourceDirPath];
 
-            const filteredItems = getAllFilteredItems(sourceDirPath, allDirectories, allFiles);
+            const softenSourceDirPath = softenPath(sourceDirPath)
+
+            const filteredItems = getAllFilteredItems(softenSourceDirPath, allDirectories, allFiles);
             const items = foldersAndFiles.concat(filteredItems);
-            allPromises = allPromises.concat(copyItems({items, destination, sourceDirPath}));
+            allPromises = allPromises.concat(copyItems({
+                items,
+                destination: softenPath(destination),
+                sourceDirPath: softenSourceDirPath
+            }));
         }
 
         await Promise.all(allPromises);
@@ -78,7 +91,6 @@ const copyFiles = async filesData => {
         console.error(error);
         return error;
     }
-
 };
 
 module.exports = {
