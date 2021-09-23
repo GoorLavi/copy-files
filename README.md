@@ -7,25 +7,25 @@ This is the next generation of [copy-files-tree](https://github.com/GoorLavi/cop
 
 To install package using npm
 ```
-npm install --save copy-files
+npm install --save copy-files-rev
 ```
 Or with yarn
 ```
-yarn add copy-files
+yarn add copy-files-rev
 ```
 
 ### How to use?
 ##### Sync usage: 
 
 ```js
-import {copyFilesSync} from 'copy-files-tree'
+import {copyFilesSync} from 'copy-files-rev'
 
 const error = copyFilesSync(FoldersData);
 ```  
 
 ##### Async usage: 
 ```js
-import {copyFiles} from 'copy-files-tree'
+import {copyFiles} from 'copy-files-rev'
 
 (async () => {
    const error = await copyFiles(FoldersData);
@@ -55,7 +55,7 @@ import {copyFiles} from 'copy-files-tree'
 ### Example:   
 
 ```js
-import {copyFiles} from 'copy-files-tree'
+import {copyFiles} from 'copy-files-rev'
 
 const FoldersData = {
     '/Users/user1/folder-name-1': {
