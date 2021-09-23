@@ -32,7 +32,7 @@ import {copyFiles} from 'copy-files-tree'
 
 (async () => {
    const error = await copyFiles(FoldersData);
-}())
+})()
 ```
 
 ## Props
@@ -75,11 +75,12 @@ const FoldersData = {
 
 (async () => {
    const error = await copyFiles(FoldersData);
-}())
+})()
 
 ```
 
 
+### Files Structure
 ```js
 /Users/ ----- |
                - user1 --- folder-name-1 ---
