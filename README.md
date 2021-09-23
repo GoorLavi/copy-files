@@ -1,4 +1,4 @@
-# copy-files
+# copy-files-rev
 
 Copy files and folders to a wanted destination.  
 This is the next generation of [copy-files-tree](https://github.com/GoorLavi/copy-files-tree) package
