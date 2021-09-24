@@ -1,7 +1,7 @@
 {
   "name": "copy-files-rev",
-  "version": "1.0.2",
-  "description": "copy files from source into destination",
+  "version": "1.0.3",
+  "description": "Copy files from source into destination",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
