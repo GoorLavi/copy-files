@@ -19,35 +19,6 @@ const copyItemsSync = ({
         fs.copySync(`${sourceDirPath}/${item}`, `${destination}/${item}`)
     );
 
-const copyFilesSync = filesData => {
-
-    try {
-        for (let sourceDirPath in filesData) {
-            const {
-                options: {
-                    allFiles,
-                    allDirectories
-                } = {},
-                destination,
-                foldersAndFiles = []
-            } = filesData[sourceDirPath];
-
-            const softenSourceDirPath = softenPath(sourceDirPath)
-
-            const filteredItems = getAllFilteredItems(softenSourceDirPath, allDirectories, allFiles);
-            const items = foldersAndFiles.concat(filteredItems);
-            copyItemsSync({
-                items,
-                destination: softenPath(destination),
-                sourceDirPath: softenSourceDirPath});
-        }
-
-    } catch (error) {
-        console.error(error);
-        return error;
-    }
-};
-
 const copyItems = ({items, destination, sourceDirPath}) =>
     items.map(item =>
         new Promise((resolve, reject) => {
@@ -60,30 +31,69 @@ const copyItems = ({items, destination, sourceDirPath}) =>
     );
 
 
+const getItems = ({sourceDirPath, value}) => {
+    const {
+        options: {
+            allFiles,
+            allDirectories
+        } = {},
+        foldersAndFiles = []
+    } = value;
+
+    const filteredItems = getAllFilteredItems(sourceDirPath, allDirectories, allFiles);
+    return foldersAndFiles.concat(filteredItems);
+}
+
+const copyFilesSync = filesData => {
+    try {
+        for (let [sourceDirPath, value] of Object.entries(filesData)) {
+            try {
+                const {destination} = value || {};
+                if (!destination)
+                    throw 'Item must have destination';
+
+                const softenSourceDirPath = softenPath(sourceDirPath)
+                const items = getItems({sourceDirPath: softenSourceDirPath, value});
+
+                copyItemsSync({
+                    items,
+                    destination: softenPath(destination),
+                    sourceDirPath: softenSourceDirPath
+                });
+            } catch (error) {
+                console.error('Error copy items ', error);
+                return error;
+            }
+        }
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+};
+
 const copyFiles = async filesData => {
 
     try {
         let allPromises = [];
 
-        for (let sourceDirPath in filesData) {
-            const {
-                options: {
-                    allFiles,
-                    allDirectories
-                } = {},
-                destination,
-                foldersAndFiles = []
-            } = filesData[sourceDirPath];
+        for (let [sourceDirPath, value] of Object.entries(filesData)) {
+            try {
+                const {destination} = value || {};
+                if (!destination)
+                    throw 'Item must have destination';
 
-            const softenSourceDirPath = softenPath(sourceDirPath)
+                const softenSourceDirPath = softenPath(sourceDirPath)
+                const items = getItems({sourceDirPath: softenSourceDirPath, value});
 
-            const filteredItems = getAllFilteredItems(softenSourceDirPath, allDirectories, allFiles);
-            const items = foldersAndFiles.concat(filteredItems);
-            allPromises = allPromises.concat(copyItems({
-                items,
-                destination: softenPath(destination),
-                sourceDirPath: softenSourceDirPath
-            }));
+                allPromises = allPromises.concat(copyItems({
+                    items,
+                    destination: softenPath(destination),
+                    sourceDirPath: softenSourceDirPath
+                }));
+            } catch (error) {
+                console.error('Error copy items ', error);
+                return error;
+            }
         }
 
         await Promise.all(allPromises);

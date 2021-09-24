@@ -21,9 +21,15 @@ const filesData = {
     }
 };
 
-//Async operation
+// Async operation
 copyFilesTree.copyFiles(filesData).then(err => {
     if (err) console.log(err);
 });
-//Sync operation
+
+// ES6+
+(async () => {
+    const error = await copyFilesTree.copyFiles(filesData)
+})();
+
+// Sync operation
 copyFilesTree.copyFilesSync(filesData);
