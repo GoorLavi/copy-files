@@ -1,6 +1,6 @@
 {
   "name": "copy-files-rev",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "copy files from source into destination",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GoorLavi/copy-files-tree.git"
+    "url": "git@github.com:GoorLavi/copy-files.git"
   },
   "keywords": [
     "copy-files-tree",
